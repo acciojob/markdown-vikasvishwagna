@@ -1,11 +1,15 @@
 
 import React from 'react'
 import MarkdownEditor from './MarkdownEditor'
+import './Markdown.css';
+
+
 
 
 function App() {
   return (
-    <div>
+    <div className='app'>
+      <h1>React Markdown Editor</h1>
       <MarkdownEditor />
     </div>
   )

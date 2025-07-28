@@ -2,7 +2,7 @@ import { marked } from 'marked';
 import React, { useEffect, useState } from 'react'
 
 function MarkdownEditor() {
-  const [markdownText, setMarkdownText] = useState('hello **vikas**, enter the text..');
+  const [markdownText, setMarkdownText] = useState(' **Hello**');
   const [previewHtmlText, setPreviewHtmlText] = useState('');
   const [isLoading, setIsloading] = useState(false);
   
@@ -15,7 +15,7 @@ function MarkdownEditor() {
 
     const timer = setTimeout(() => {
       try{
-        setPreviewHtmlText(marked.parse(markdownText));
+        setPreviewHtmlText(marked.parse(markdownText, { breaks: true }));
       }catch(error){
         console.error(error);
         setPreviewHtmlText("<p style='color:red'>error rendering markdown</p>")
@@ -31,17 +31,17 @@ function MarkdownEditor() {
 
   return (
       <div className='markdown-container'>
+
         <div className='input-section'>
-          <h1>Markdown</h1>
+          <h2>Markdown Input</h2>
           <textarea className='textarea' placeholder='Enter text' value={markdownText}
           onChange={handleChange}/>
         </div>
         
         <div className='preview-section'>
-          <h1>preview</h1>
-          {/* {isLoading ? <p>loading...</p> :  <div dangerouslySetInnerHTML={{ __html: previewHtmlText}} />} */}
-
-          {isLoading ? <p>loading...</p> : <div dangerouslySetInnerHTML={{ __html: previewHtmlText}} />}
+          <h2>Live Preview</h2>
+          {isLoading ? (<div className="loading">Loading preview...</div>) : (<div className='preview' dangerouslySetInnerHTML={{ __html: previewHtmlText}} />)
+          }
         </div>
 
          
